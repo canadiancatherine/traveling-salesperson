@@ -15,15 +15,18 @@
 ## ------- import packages -------
 import networkx as nx
 import dimod
+import dwave_networkx as dnx
 # TODO:  Import your sampler
-
+from dwave.samplers import SimulatedAnnealingSampler
 # TODO:  Import your Traveling Salesperson QUBO generator
+from dwave_networkx.algorithms.tsp import traveling_salesperson_qubo
 
 
 def get_qubo(G, lagrange, n):
     """Returns a dictionary representing a QUBO"""
 
     # TODO:  Add QUBO construction here
+    Q=traveling_salesperson_qubo(G, lagrange, weight='weight', missing_edge_weight=None)
 
     offset = 2 * n * lagrange
 
@@ -34,7 +37,7 @@ def get_sampler():
     """Returns a sampler"""
 
     # TODO: Enter your sampler here
-
+    sampler = SimulatedAnnealingSampler()
 
     return sampler
 
